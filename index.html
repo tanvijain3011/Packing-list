@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pack & Go — Packing List</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <div class="brand">
+          <span class="brand-icon">🎒</span>
+          <h1 class="brand-title">Pack &amp; Go</h1>
+        </div>
+        <button class="ghost-btn small" id="resetAllBtn">Reset all</button>
+      </div>
+      <nav class="tabs">
+        <button class="tab-btn active" data-view="trips">My Trips</button>
+        <button class="tab-btn" data-view="template">Master Template</button>
+        <button class="tab-btn hidden" id="tripTab" data-view="trip"></button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TRIPS VIEW -->
+    <section id="view-trips" class="view active">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">Your Expeditions</h2>
+          <p class="view-subtitle">Each trip cloned from your master template</p>
+        </div>
+        <button class="primary-btn" id="openNewTripBtn">+ New Trip</button>
+      </div>
+      <div id="tripsEmpty" class="empty-state hidden">
+        <div class="empty-icon">🗺️</div>
+        <p class="empty-title">No trips yet</p>
+        <p class="empty-desc">Create a trip and we'll copy your master template to get you started.</p>
+        <button class="primary-btn" id="openNewTripBtn2">Plan your first trip</button>
+      </div>
+      <div id="tripsList" class="trips-grid"></div>
+    </section>
+
+    <!-- TEMPLATE VIEW -->
+    <section id="view-template" class="view">
+      <div class="view-header">
+        <div>
+          <h2 class="view-title">Master Template</h2>
+          <p class="view-subtitle" id="templateSubtitle">This list is cloned whenever you start a new trip.</p>
+        </div>
+      </div>
+      <div class="card add-form">
+        <p class="section-label">Add New Item</p>
+        <div class="input-row">
+          <input class="text-input" type="text" id="templateItemInput" placeholder="Item name..." />
+          <select class="select-input" id="templateCategorySelect"></select>
+          <button class="primary-btn" id="addTemplateItemBtn">Add</button>
+        </div>
+      </div>
+      <div id="templateList" class="category-grid"></div>
+      <div id="templateEmpty" class="empty-state hidden">
+        <p class="empty-title" style="font-size:18px">Template is empty — add your first item above.</p>
+      </div>
+    </section>
+
+    <!-- TRIP DETAIL VIEW -->
+    <section id="view-trip" class="view">
+      <button class="back-btn" id="backBtn">← Back to trips</button>
+      <div class="trip-detail-header">
+        <div class="trip-detail-meta">
+          <span class="trip-stamp" id="detailStamp"></span>
+          <div>
+            <h2 class="view-title" id="detailName"></h2>
+            <p class="view-subtitle" id="detailDate"></p>
+          </div>
+        </div>
+        <div class="progress-section">
+          <div class="progress-labels">
+            <span id="detailPackedLabel"></span>
+            <span id="detailProgressPct" class="progress-pct"></span>
+          </div>
+          <div class="progress-bar-track large">
+            <div class="progress-bar-fill" id="detailProgressBar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card add-form">
+        <p class="section-label">Add Item to This Trip</p>
+        <div class="input-row">
+          <input class="text-input" type="text" id="tripItemInput" placeholder="Something you need..." />
+          <select class="select-input" id="tripCategorySelect"></select>
+          <button class="primary-btn" id="addTripItemBtn">Add</button>
+        </div>
+      </div>
+      <div id="tripChecklist" class="category-grid"></div>
+      <div id="tripEmpty" class="empty-state hidden">
+        <p class="empty-title" style="font-size:18px">No items yet. Add something above!</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NEW TRIP MODAL -->
+  <div class="modal-overlay hidden" id="newTripModal">
+    <div class="modal-box">
+      <h3 class="modal-title">New Expedition</h3>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Trip Name *</label>
+          <input class="text-input full" type="text" id="newTripNameInput" placeholder="e.g. Summer in Lisbon" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Departure Date</label>
+          <input class="text-input full" type="date" id="newTripDateInput" />
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="primary-btn flex1" id="createTripBtn">Create Trip</button>
+        <button class="ghost-btn" id="cancelTripBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
